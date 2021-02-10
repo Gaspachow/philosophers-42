@@ -1,0 +1,6 @@
+*.out
+*.gch
+*.o
+philo_one/philo_one
+philo_two/philo_two
+philo_three/philo_three
