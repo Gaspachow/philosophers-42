@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:31:56 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/10 18:35:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/11 17:22:50 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,14 @@ int	write_error(char *str)
 	write(2, "Error: ", 7);
 	write(2, str, len);
 	write(2, "\n", 1);
+	return (1);
+}
+
+int	error_manager(int error)
+{
+	if (error == 1)
+		return (write_error("At least one wrong argument"));
+	if (error == 2)
+		return (write_error("Fatal error when intializing mutex"));
 	return (1);
 }

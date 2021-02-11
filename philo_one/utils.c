@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:59:07 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/10 19:11:14 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/11 17:26:30 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_calloc(size_t n, size_t size)
 	return (ptr);
 }
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	long int	n;
 	int			sign;
@@ -33,10 +33,7 @@ int	ft_atoi(const char *str)
 	while ((*str <= 13 && *str >= 9) || *str == 32)
 		str++;
 	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
+		return (-1);
 	else if (*str == '+')
 		str++;
 	while (*str)
@@ -44,7 +41,7 @@ int	ft_atoi(const char *str)
 		if (*str >= '0' && *str <= '9')
 			n = n * 10 + (*str++ - '0');
 		else
-			break ;
+			return (-1);
 	}
 	return ((int)(n * sign));
 }
