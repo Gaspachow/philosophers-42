@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/11 17:25:33 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/12 16:06:51 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	init_philosophers(t_args *rules)
 		rules->philosophers[i].left_fork_id = i;
 		rules->philosophers[i].right_fork_id = (i + 1) % rules->nb_philo;
 		rules->philosophers[i].t_last_meal = 0;
+		rules->philosophers[i].rules = rules;
 	}
 	return (0);
 }
@@ -62,7 +63,6 @@ int	init_all(t_args *rules, char **argv)
 		rules->nb_eat = -1;
 	if (init_mutex(rules))
 		return (2);
-	if (init_philosophers(rules))
-		return (2);
+	init_philosophers(rules);
 	return (0);
 }

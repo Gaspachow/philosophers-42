@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/11 17:26:17 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/12 17:12:26 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 # include <pthread.h>
 
+typedef struct 		s_args t_args;
+
 typedef	struct		s_philosopher
 {
 	int				id;
@@ -26,6 +28,8 @@ typedef	struct		s_philosopher
 	int				left_fork_id;
 	int				right_fork_id;
 	long long		t_last_meal;
+	t_args			*rules;
+	pthread_t		thread_id;
 }					t_philosopher;
 
 typedef struct		s_args
@@ -59,5 +63,11 @@ int					init_all(t_args *rules, char **argv);
 
 void				*ft_calloc(size_t n, size_t size);
 int					ft_atoi(const char *str);
+
+/*
+** ----- launcher.c -----
+*/
+
+int					launcher(t_args *rules);
 
 #endif
