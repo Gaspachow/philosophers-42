@@ -13,6 +13,8 @@ FLAGS	= -Wall -Wextra -Werror
 
 INCLUDE	= -lpthread
 
+HEADER	= philo.h
+
 
 
 
@@ -31,5 +33,5 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.c $(INCLUDE)
+%.o: %.c $(HEADER)
 	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
