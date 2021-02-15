@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/15 14:44:42 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/15 15:40:20 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_eats(t_philosopher *philo)
 {
-	t_args *rules;
+	t_rules *rules;
 
 	rules = philo->rules;
 	pthread_mutex_lock(&(rules->forks[philo->left_fork_id]));
@@ -27,13 +27,14 @@ void	philo_eats(t_philosopher *philo)
 	pthread_mutex_unlock(&(rules->forks[philo->right_fork_id]));
 }
 
-void	*philo_thread(void *void_philosopher)
+void	*p_thread(void *void_philosopher)
 {
-	int i;
+	int				i;
+	t_philosopher	*philo;
 
 	i = 0;
-	t_philosopher *philo = (t_philosopher *)void_philosopher;
-	while(i < philo->rules->nb_eat || philo->rules->nb_eat == -1)
+	philo = (t_philosopher *)void_philosopher;
+	while (i < philo->rules->nb_eat || philo->rules->nb_eat == -1)
 	{
 		philo_eats(philo);
 		action_print(philo->rules, philo->id, "is sleeping");
@@ -43,7 +44,7 @@ void	*philo_thread(void *void_philosopher)
 	}
 }
 
-void	exit_launcher(t_args *rules, t_philosopher *philos)
+void	exit_launcher(t_rules *rules, t_philosopher *philos)
 {
 	int i;
 
@@ -55,18 +56,18 @@ void	exit_launcher(t_args *rules, t_philosopher *philos)
 	}
 }
 
-int		launcher(t_args *rules)
+int		launcher(t_rules *rules)
 {
-	int i;
-	t_philosopher *philos;
+	int				i;
+	t_philosopher	*phi;
 
 	i = 0;
-	philos = rules->philosophers;
+	phi = rules->philosophers;
 	while (i < rules->nb_philo)
 	{
 		while (i < rules->nb_philo)
 		{
-			if (pthread_create(&(philos[i].thread_id), NULL, philo_thread, &(philos[i])))
+			if (pthread_create(&(phi[i].thread_id), NULL, p_thread, &(phi[i])))
 				return (1);
 			i += 2;
 		}
@@ -77,6 +78,6 @@ int		launcher(t_args *rules)
 		}
 	}
 	i = 0;
-	exit_launcher(rules, philos);
+	exit_launcher(rules, phi);
 	return (0);
 }

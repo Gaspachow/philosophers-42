@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/12 16:06:51 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/15 15:40:20 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutex(t_args *rules)
+int	init_mutex(t_rules *rules)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int	init_mutex(t_args *rules)
 	return (0);
 }
 
-int	init_philosophers(t_args *rules)
+int	init_philosophers(t_rules *rules)
 {
 	int i;
 
@@ -44,7 +44,7 @@ int	init_philosophers(t_args *rules)
 	return (0);
 }
 
-int	init_all(t_args *rules, char **argv)
+int	init_all(t_rules *rules, char **argv)
 {
 	rules->nb_philo = ft_atoi(argv[1]);
 	rules->time_death = ft_atoi(argv[2]);

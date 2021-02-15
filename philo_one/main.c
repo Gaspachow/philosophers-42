@@ -6,13 +6,13 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 17:20:40 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/15 14:18:00 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/15 15:40:20 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	tester(t_args rules)
+// void	tester(t_rules rules)
 // {
 // 	int i;
 
@@ -37,7 +37,7 @@
 
 int		main(int argc, char **argv)
 {
-	t_args	rules;
+	t_rules	rules;
 	int		ret;
 
 	if (argc != 5 && argc != 6)
