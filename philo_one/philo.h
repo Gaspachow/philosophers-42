@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/12 17:12:26 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:39:25 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					init_all(t_args *rules, char **argv);
 
 void				*ft_calloc(size_t n, size_t size);
 int					ft_atoi(const char *str);
+void				action_print(t_args *rules, int id, char *string);
 
 /*
 ** ----- launcher.c -----

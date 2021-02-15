@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:59:07 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/11 17:26:30 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:45:48 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ int		ft_atoi(const char *str)
 			return (-1);
 	}
 	return ((int)(n * sign));
+}
+
+void	action_print(t_args *rules, int id, char *string)
+{
+	pthread_mutex_lock(&(rules->writing));
+	printf("time_stamp_in_ms ");
+	printf("%i ", id + 1);
+	printf("%s\n", string);
+	pthread_mutex_unlock(&(rules->writing));
+	return ;
 }
