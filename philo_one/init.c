@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/15 17:49:52 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:34:29 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	init_all(t_rules *rules, char **argv)
 	rules->time_eat = ft_atoi(argv[3]);
 	rules->time_sleep = ft_atoi(argv[4]);
 	rules->dieded = 0;
-	if (rules->nb_philo < 0 || rules->time_death < 0 || rules->time_eat < 0
+	if (rules->nb_philo < 2 || rules->time_death < 0 || rules->time_eat < 0
 		|| rules->time_sleep < 0 || rules->nb_philo > 250)
 		return (1);
 	if (argv[5])
