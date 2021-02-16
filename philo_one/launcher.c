@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/16 17:55:04 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:20:28 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,15 @@ void	*p_thread(void *void_philosopher)
 	i = 0;
 	philo = (t_philosopher *)void_philosopher;
 	rules = philo->rules;
-	while ((i < rules->nb_eat || rules->nb_eat == -1) && !(rules->dieded))
+	if (philo->id % 2)
 	{
+		usleep(10000);
+		printf("id is %i\n", philo->id);
+	}
+	while (!(rules->dieded))
+	{
+		if (i >= rules->nb_eat && rules->nb_eat != -1)
+			break ;
 		philo_eats(philo);
 		action_print(rules, philo->id, "is sleeping");
 		smart_sleep(rules->time_sleep, rules);
@@ -80,7 +87,7 @@ void	death_checker(t_rules *r, t_philosopher *p)
 				r->dieded = 1;
 			}
 			pthread_mutex_unlock(&(p[i].meal_check));
-			usleep(1000);
+			usleep(100);
 		}
 		if (r->dieded)
 			break ;
@@ -105,16 +112,7 @@ int		launcher(t_rules *rules)
 		if (pthread_create(&(phi[i].thread_id), NULL, p_thread, &(phi[i])))
 			return (1);
 		phi[i].t_last_meal = timestamp();
-		i += 2;
-	}
-	usleep(10000);
-	i = 1;
-	while (i < rules->nb_philo)
-	{
-		if (pthread_create(&(phi[i].thread_id), NULL, p_thread, &(phi[i])))
-			return (1);
-		phi[i].t_last_meal = timestamp();
-		i += 2;
+		i++;
 	}
 	death_checker(rules, rules->philosophers);
 	exit_launcher(rules, phi);

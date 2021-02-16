@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:59:07 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/16 17:51:59 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:10:45 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		smart_sleep(long long time, t_rules *rules)
 	i = timestamp();
 	while (time_diff(i, timestamp()) < time && !(rules->dieded))
 	{
-		usleep(1000);
+		usleep(50);
 	}
 }
 
