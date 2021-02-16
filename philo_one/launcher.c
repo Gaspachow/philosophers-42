@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/16 18:20:28 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/16 19:05:35 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ void	*p_thread(void *void_philosopher)
 	philo = (t_philosopher *)void_philosopher;
 	rules = philo->rules;
 	if (philo->id % 2)
-	{
 		usleep(10000);
-		printf("id is %i\n", philo->id);
-	}
 	while (!(rules->dieded))
 	{
 		if (i >= rules->nb_eat && rules->nb_eat != -1)
@@ -64,11 +61,11 @@ void	exit_launcher(t_rules *rules, t_philosopher *philos)
 
 	i = -1;
 	while (++i < rules->nb_philo)
-	{
 		pthread_join(philos[i].thread_id, NULL);
+	i = -1;
+	while (++i < rules->nb_philo)
 		pthread_mutex_destroy(&(rules->forks[i]));
-		pthread_mutex_destroy(&(rules->writing));
-	}
+	pthread_mutex_destroy(&(rules->writing));
 }
 
 void	death_checker(t_rules *r, t_philosopher *p)
