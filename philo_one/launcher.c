@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/15 21:34:43 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/16 17:55:04 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ void	death_checker(t_rules *r, t_philosopher *p)
 	while (42)
 	{
 		i = -1;
-		while (++i < r->nb_philo)
+		while (++i < r->nb_philo && !(r->dieded))
 		{
 			pthread_mutex_lock(&(p[i].meal_check));
 			if (time_diff(p[i].t_last_meal, timestamp()) > r->time_death)
 			{
-				pthread_mutex_unlock(&(p[i].meal_check));
 				action_print(r, i, "died");
 				r->dieded = 1;
-				break ;
 			}
 			pthread_mutex_unlock(&(p[i].meal_check));
+			usleep(1000);
 		}
 		if (r->dieded)
 			break ;
