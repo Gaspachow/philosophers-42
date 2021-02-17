@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/15 20:40:40 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/17 16:45:13 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef	struct			s_philosopher
 	int					left_fork_id;
 	int					right_fork_id;
 	long long			t_last_meal;
-	pthread_mutex_t		meal_check;
 	struct s_rules		*rules;
 	pthread_t			thread_id;
 }						t_philosopher;
@@ -43,6 +42,7 @@ typedef struct			s_rules
 	int					nb_eat;
 	int					dieded;
 	long long			first_timestamp;
+	pthread_mutex_t		meal_check;
 	pthread_mutex_t		forks[250];
 	pthread_mutex_t		writing;
 	t_philosopher		philosophers[250];

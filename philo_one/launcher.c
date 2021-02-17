@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/16 19:05:35 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/17 16:46:33 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	philo_eats(t_philosopher *philo)
 	action_print(rules, philo->id, "has taken a fork");
 	pthread_mutex_lock(&(rules->forks[philo->right_fork_id]));
 	action_print(rules, philo->id, "has taken a fork");
-	pthread_mutex_lock(&(philo->meal_check));
+	pthread_mutex_lock(&(rules->meal_check));
 	action_print(rules, philo->id, "is eating");
 	philo->t_last_meal = timestamp();
-	pthread_mutex_unlock(&(philo->meal_check));
+	pthread_mutex_unlock(&(rules->meal_check));
 	(philo->x_ate)++;
 	smart_sleep(rules->time_eat, rules);
 	pthread_mutex_unlock(&(rules->forks[philo->left_fork_id]));
@@ -77,13 +77,13 @@ void	death_checker(t_rules *r, t_philosopher *p)
 		i = -1;
 		while (++i < r->nb_philo && !(r->dieded))
 		{
-			pthread_mutex_lock(&(p[i].meal_check));
+			pthread_mutex_lock(&(r->meal_check));
 			if (time_diff(p[i].t_last_meal, timestamp()) > r->time_death)
 			{
 				action_print(r, i, "died");
 				r->dieded = 1;
 			}
-			pthread_mutex_unlock(&(p[i].meal_check));
+			pthread_mutex_unlock(&(r->meal_check));
 			usleep(100);
 		}
 		if (r->dieded)

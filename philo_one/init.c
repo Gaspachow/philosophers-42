@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/16 18:34:29 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/17 16:46:52 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	init_mutex(t_rules *rules)
 			return (1);
 	}
 	if (pthread_mutex_init(&(rules->writing), NULL))
+		return (1);
+	if (pthread_mutex_init(&(rules->meal_check), NULL))
 		return (1);
 	return (0);
 }
