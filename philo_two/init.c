@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/17 17:56:32 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:14:14 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	init_semaphore(t_rules *rules)
 {
 	sem_unlink("/philo_forks");
+	sem_unlink("/philo_write");
+	sem_unlink("/philo_mealcheck");
 	rules->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, rules->nb_philo);
 	rules->writing = sem_open("/philo_write", O_CREAT, S_IRWXU, 1);
 	rules->meal_check = sem_open("/philo_mealcheck", O_CREAT, S_IRWXU, 1);

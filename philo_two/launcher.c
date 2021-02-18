@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/18 17:22:40 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:16:07 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*p_thread(void *void_philosopher)
 	philo = (t_philosopher *)void_philosopher;
 	rules = philo->rules;
 	if (philo->id % 2)
-		usleep((rules->time_eat) * 1000);
+		usleep(15000);
 	while (!(rules->dieded))
 	{
 		if (i >= rules->nb_eat && rules->nb_eat != -1)
