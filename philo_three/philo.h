@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/18 20:38:27 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/19 18:10:33 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>

@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/18 20:46:14 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/19 18:48:23 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,17 @@ void	*death_checker(void *void_philosopher)
 	return (NULL);
 }
 
-void	p_process(void *void_philosopher)
+void	p_process(void *void_phil)
 {
 	int				i;
 	t_philosopher	*philo;
 	t_rules			*rules;
 
 	i = 0;
-	philo = (t_philosopher *)void_philosopher;
+	philo = (t_philosopher *)void_phil;
 	rules = philo->rules;
 	philo->t_last_meal = timestamp();
-	pthread_create(&(philo->death_check), NULL, death_checker, void_philosopher);
+	pthread_create(&(philo->death_check), NULL, death_checker, void_phil);
 	if (philo->id % 2)
 		usleep(15000);
 	while (!(rules->dieded))
@@ -79,14 +79,30 @@ void	p_process(void *void_philosopher)
 		action_print(rules, philo->id, "is thinking");
 		i++;
 	}
+	pthread_join(philo->death_check, NULL);
+	if (rules->dieded)
+		exit(1);
 	exit(0);
 }
 
 void	exit_launcher(t_rules *rules)
 {
-	int i;
+	int	i;
+	int	ret;
 
-	i = -1;
+	i = 0;
+	while (i < rules->nb_philo)
+	{
+		waitpid(-1, &ret, 0);
+		if (ret != 0)
+		{
+			i = -1;
+			while (++i < rules->nb_philo)
+				kill(rules->philosophers[i].proc_id, 15);
+			break ;
+		}
+		i++;
+	}
 	sem_close(rules->forks);
 	sem_close(rules->writing);
 	sem_close(rules->meal_check);
@@ -112,7 +128,6 @@ int		launcher(t_rules *rules)
 			p_process(&(phi[i]));
 		usleep(100);
 	}
-	usleep(5000000);
 	exit_launcher(rules);
 	return (0);
 }
