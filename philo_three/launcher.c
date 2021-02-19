@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/19 18:48:23 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/19 19:06:51 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ void	*death_checker(void *void_philosopher)
 		{
 			action_print(r, philo->id, "died");
 			r->dieded = 1;
+			sem_wait(r->writing);
+			exit(1);
 		}
 		sem_post(r->meal_check);
 		if (r->dieded)
 			break ;
 		usleep(1000);
-		if (philo->x_ate >= r->nb_eat)
+		if (philo->x_ate >= r->nb_eat && r->nb_eat != -1)
 			break ;
 	}
 	return (NULL);
