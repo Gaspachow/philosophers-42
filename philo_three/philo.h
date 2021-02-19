@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/19 18:10:33 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/19 19:22:27 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/time.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
