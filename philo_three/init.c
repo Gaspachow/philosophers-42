@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:47:47 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/18 18:14:14 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:33:01 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ int	init_all(t_rules *rules, char **argv)
 	if (argv[5])
 	{
 		rules->nb_eat = ft_atoi(argv[5]);
-		if (rules->nb_eat < 0)
+		if (rules->nb_eat <= 0)
 			return (1);
 	}
 	else
 		rules->nb_eat = -1;
+	if (rules->nb_eat == 1)
+		rules->nb_eat++;
 	if (init_semaphore(rules))
 		return (2);
 	init_philosophers(rules);

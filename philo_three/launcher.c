@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/19 19:06:51 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:31:26 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	philo_eats(t_philosopher *philo)
 	action_print(rules, philo->id, "is eating");
 	philo->t_last_meal = timestamp();
 	sem_post(rules->meal_check);
-	(philo->x_ate)++;
 	smart_sleep(rules->time_eat, rules);
+	(philo->x_ate)++;
 	sem_post(rules->forks);
 	sem_post(rules->forks);
 }
@@ -60,11 +60,9 @@ void	*death_checker(void *void_philosopher)
 
 void	p_process(void *void_phil)
 {
-	int				i;
 	t_philosopher	*philo;
 	t_rules			*rules;
 
-	i = 0;
 	philo = (t_philosopher *)void_phil;
 	rules = philo->rules;
 	philo->t_last_meal = timestamp();
@@ -73,13 +71,12 @@ void	p_process(void *void_phil)
 		usleep(15000);
 	while (!(rules->dieded))
 	{
-		if (i >= rules->nb_eat && rules->nb_eat != -1)
-			break ;
 		philo_eats(philo);
+		if (philo->x_ate >= rules->nb_eat && rules->nb_eat != -1)
+			break ;
 		action_print(rules, philo->id, "is sleeping");
 		smart_sleep(rules->time_sleep, rules);
 		action_print(rules, philo->id, "is thinking");
-		i++;
 	}
 	pthread_join(philo->death_check, NULL);
 	if (rules->dieded)
