@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:19:34 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/18 18:16:07 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/22 10:38:20 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	philo_eats(t_philosopher *philo)
 	action_print(rules, philo->id, "is eating");
 	philo->t_last_meal = timestamp();
 	sem_post(rules->meal_check);
-	(philo->x_ate)++;
 	smart_sleep(rules->time_eat, rules);
+	(philo->x_ate)++;
 	sem_post(rules->forks);
 	sem_post(rules->forks);
 }
@@ -44,9 +44,9 @@ void	*p_thread(void *void_philosopher)
 		usleep(15000);
 	while (!(rules->dieded))
 	{
-		if (i >= rules->nb_eat && rules->nb_eat != -1)
-			break ;
 		philo_eats(philo);
+		if (rules->all_ate)
+			break ;
 		action_print(rules, philo->id, "is sleeping");
 		smart_sleep(rules->time_sleep, rules);
 		action_print(rules, philo->id, "is thinking");
@@ -74,7 +74,7 @@ void	death_checker(t_rules *r, t_philosopher *p)
 {
 	int i;
 
-	while (42)
+	while (!(r->all_ate))
 	{
 		i = -1;
 		while (++i < r->nb_philo && !(r->dieded))
@@ -94,7 +94,7 @@ void	death_checker(t_rules *r, t_philosopher *p)
 		while (r->nb_eat != -1 && i < r->nb_philo && p[i].x_ate >= r->nb_eat)
 			i++;
 		if (i == r->nb_philo)
-			break ;
+			r->all_ate = 1;
 	}
 }
 

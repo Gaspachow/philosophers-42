@@ -6,7 +6,7 @@
 /*   By: gsmets <gsmets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:58 by gsmets            #+#    #+#             */
-/*   Updated: 2021/02/17 16:45:13 by gsmets           ###   ########.fr       */
+/*   Updated: 2021/02/22 10:14:00 by gsmets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct			s_rules
 	int					time_sleep;
 	int					nb_eat;
 	int					dieded;
+	int					all_ate;
 	long long			first_timestamp;
 	pthread_mutex_t		meal_check;
 	pthread_mutex_t		forks[250];
