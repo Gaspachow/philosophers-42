@@ -33,11 +33,9 @@ void	philo_eats(t_philosopher *philo)
 
 void	*p_thread(void *void_philosopher)
 {
-	int				i;
 	t_philosopher	*philo;
 	t_rules			*rules;
 
-	i = 0;
 	philo = (t_philosopher *)void_philosopher;
 	rules = philo->rules;
 	if (philo->id % 2)
@@ -50,7 +48,6 @@ void	*p_thread(void *void_philosopher)
 		action_print(rules, philo->id, "is sleeping");
 		smart_sleep(rules->time_sleep, rules);
 		action_print(rules, philo->id, "is thinking");
-		i++;
 	}
 	return (NULL);
 }
